@@ -307,5 +307,3 @@ No license has been selected yet. Until a license is added, all rights are reser
 Author
 
 GitHub: makeit-master <!-- https://github.com/makeit-master -->
-
-Feel free to reach out through GitHub with feedback or questions.
