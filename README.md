@@ -1,309 +1,327 @@
-Courtly
+# Courtly 🏸
 
-https://img.shields.io/badge/status-under%20development-orange
-https://img.shields.io/badge/stage-early%20development-yellow
+**A badminton court booking platform built with TypeScript.**
 
-Table of Contents
-Overview
-Features
-Technology Stack
-System Architecture
-Project Structure (Proposed)
-Getting Started (Windows)
-Environment Variables
-Database Setup with Prisma
-API Overview (Planned)
-Testing
-Security Considerations
-Roadmap
-Contributing
-License
-Author
-Overview
+Courtly is a full-stack web application project designed to make booking badminton courts easier. Players will be able to explore courts, check available time slots, and manage reservations, while court owners will be able to manage their facilities and bookings.
 
-Finding and booking a badminton court often means calling venues, messaging owners, or relying on informal group chats. Availability is hard to see, double bookings happen, and owners have no simple way to track reservations.
+> **Project Status:** In Development  
+> This project is currently in its early development stage. Features listed below are planned unless explicitly marked as implemented.
 
-Courtly aims to solve this by providing a single web application where:
+## Table of Contents
 
-Players can browse courts, see open time slots by date, book a court, and manage their reservations.
-Court owners can list and manage their courts and monitor incoming bookings.
+- [Overview](#overview)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Architecture](#architecture)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [Database Setup](#database-setup)
+- [Planned API Endpoints](#planned-api-endpoints)
+- [Testing](#testing)
+- [Security](#security)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Author](#author)
 
-The project is also a practical exercise in building a full-stack TypeScript application with authentication, role-based access control, relational data modeling, and booking-conflict handling.
+## Overview
 
-Features
-Implemented
- None yet. This section will be updated as features are completed and verified.
-Planned
-#	Feature	Status
-1	User registration and login	Planned
-2	Browse and view badminton courts	Planned
-3	Search and filter courts	Planned
-4	View available time slots by date	Planned
-5	Book a court	Planned
-6	View personal booking history	Planned
-7	Cancel eligible bookings	Planned
-8	Role-based access for players and court owners	Planned
-9	Court management for owners	Planned
-10	Prevent double booking of the same court time slot	Planned
-11	Automated tests for key API endpoints and booking logic	Planned
-Technology Stack
+Finding and booking a badminton court can involve contacting venues individually or relying on informal messaging. This makes checking availability and managing reservations inconvenient.
 
-The stack below is planned. Items are not confirmed as installed or configured until the repository reflects them.
+Courtly aims to provide a centralized platform where players can discover courts, select available time slots, and manage their bookings. Court owners will also have tools to manage their courts and monitor reservations.
 
-Layer	Technology
-Frontend	React, TypeScript, Vite
-Backend	Node.js, Express.js, TypeScript
-Database	PostgreSQL (via Supabase)
-ORM	Prisma
-Validation	Zod
-Testing	Vitest, Supertest
-Version control	Git, GitHub
-Deployment (planned)	Vercel (frontend); a suitable Node.js hosting service for the backend (to be decided)
-System Architecture
+The project serves as a practical learning experience in full-stack development, REST API design, database modeling, authentication, automated testing, and booking conflict prevention.
 
-Courtly is planned as a three-tier web application:
+## Features
 
-Frontend (client): A React + TypeScript single-page app built with Vite. It handles the user interface and communicates with the backend over HTTP.
-Backend API (server): A Node.js + Express + TypeScript REST API. It handles authentication, authorization, request validation (Zod), and booking business logic.
-Database: PostgreSQL hosted on Supabase, used purely as a managed Postgres database.
-ORM: Prisma provides type-safe database access, schema definition, and migrations. The backend talks to the database through Prisma.
-Backend API (server)
-Frontend (client)
-HTTP / JSON
-User Browser
-React + TypeScript + Vite
-Express.js + TypeScript
-Zod Validation
-Prisma ORM
-PostgreSQL on Supabase
+The following features are planned for development.
 
-This diagram shows the planned architecture and may change during development.
+### Player
 
-Project Structure (Proposed)
+- Browse and search badminton courts.
+- View court details, locations, and hourly prices.
+- Check available time slots by date.
+- Book available court time slots.
+- View booking history.
+- Cancel eligible reservations.
 
-This structure is proposed and has not been verified against the actual repository. Folder and file names may change.
+### Court Owner
 
-text
-courtly/
-├── client/                  # React + TypeScript frontend (Vite)
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/        # API calls
-│   │   └── main.tsx
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.ts
-├── server/                  # Express + TypeScript backend
-│   ├── prisma/
-│   │   └── schema.prisma
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── routes/
-│   │   ├── schemas/         # Zod schemas
-│   │   ├── services/        # Business logic (e.g., booking)
-│   │   ├── app.ts
-│   │   └── server.ts
-│   ├── tests/
-│   ├── .env.example
-│   ├── package.json
-│   └── tsconfig.json
-├── .gitignore
-└── README.md
-Getting Started (Windows)
+- Add and manage badminton courts.
+- Configure court availability and time slots.
+- View and manage reservations.
+- Monitor booking activity.
 
-These instructions describe the intended local setup. Because the project is in early development, some steps may not work until the corresponding code is added. Verify against the actual package.json scripts in each folder.
+### System
 
-Prerequisites
-Node.js (current LTS version recommended)
-npm (included with Node.js)
-Git
-A Supabase account and project (for the PostgreSQL database)
-A code editor such as VS Code
+- User authentication and role-based authorization.
+- Input validation and error handling.
+- Prevention of duplicate bookings.
+- Automated tests for critical business logic.
+
+## Technology Stack
+
+| Component | Technology |
+|---|---|
+| Frontend | React, TypeScript, Vite |
+| Backend | Node.js, Express.js, TypeScript |
+| Database | PostgreSQL |
+| Database Hosting | Supabase |
+| ORM | Prisma |
+| Validation | Zod |
+| Testing | Vitest, Supertest |
+| Version Control | Git, GitHub |
+| Planned Frontend Deployment | Vercel |
+| Planned Backend Deployment | Node.js-compatible hosting |
+
+*The stack represents the planned implementation and may change during development.*
+
+## Architecture
+
+Courtly is planned as a three-tier web application.
+
+```mermaid
+flowchart TD
+    U["Player / Court Owner"]
+    F["Frontend<br/>React + TypeScript + Vite"]
+    A["Backend REST API<br/>Node.js + Express"]
+    V["Validation<br/>Zod"]
+    P["Database Access<br/>Prisma ORM"]
+    D[("PostgreSQL<br/>Supabase")]
+
+    U --> F
+    F <-->|"HTTP / JSON"| A
+    A --> V
+    V --> P
+    P --> D
+```
+
+**Architecture responsibilities:**
+
+- **Frontend:** Provides the user interface for browsing courts and managing bookings.
+- **Backend:** Handles API requests, authentication, authorization, and booking logic.
+- **Validation:** Validates incoming request data before business logic processes it.
+- **Database:** Stores users, courts, time slots, and booking records.
+- **ORM:** Prisma provides database access and schema management.
+
+## Getting Started
+
+The following instructions describe the intended local development setup. They assume that the frontend and backend projects have been created and that the required scripts are configured.
+
+### Prerequisites
+
+Install the following tools:
+
+- [Node.js](https://nodejs.org/en/download/)
+- npm, included with Node.js
+- [Git](https://git-scm.com/downloads)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- A [Supabase](https://supabase.com/) account for the planned database
 
 Verify your installations in PowerShell:
 
-powershell
+```powershell
 node --version
 npm --version
 git --version
-1. Clone the repository
-powershell
-git clone <your-repository-url>
-cd courtly
-2. Install dependencies
-powershell
+```
+
+### 1. Clone the Repository
+
+Replace the repository URL below with the actual URL of this repository.
+
+```powershell
+git clone https://github.com/makeit-master/Courtly-Badminton-Court-Booking-System.git
+cd Courtly-Badminton-Court-Booking-System
+```
+
+### 2. Install Dependencies
+
+Once the `client` and `server` directories contain their respective `package.json` files, install their dependencies:
+
+```powershell
 cd server
 npm install
+
 cd ..\client
 npm install
-cd ..
-3. Configure environment variables
+```
 
-See Environment Variables, then set up the database as described in Database Setup with Prisma.
+### 3. Configure Environment Variables
 
-4. Run the development servers
+Create the backend environment file using the example template described in [Environment Variables](#environment-variables).
 
-Use two separate PowerShell windows.
+### 4. Start the Development Servers
 
-Backend:
+After the development scripts have been configured, run the backend and frontend in separate terminal windows.
 
-powershell
+**Backend:**
+
+```powershell
 cd server
 npm run dev
+```
 
-Frontend:
+**Frontend:**
 
-powershell
+```powershell
 cd client
 npm run dev
+```
 
-The Vite dev server typically runs at http://localhost:5173. The backend port is determined by your PORT setting.
+The frontend's local URL is typically `http://localhost:5173`. The backend URL depends on its configured port.
 
-The dev script names above are assumptions. Confirm them in each package.json.
+*Note: These commands will become usable once the corresponding applications and npm scripts are implemented.*
 
-Environment Variables
+## Environment Variables
 
-Create a .env file inside server by copying the template. Never commit .env files or real credentials.
+Backend configuration should be stored in `server/.env`. Do not commit real credentials or secrets to GitHub.
 
-powershell
-cd server
-Copy-Item .env.example .env
+A proposed `server/.env.example`:
 
-Proposed server/.env.example:
-
-env
-# Server
+```dotenv
 PORT=4000
 NODE_ENV=development
 
-# Database (replace with your own Supabase PostgreSQL connection string)
-DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+DATABASE_URL="your-postgresql-connection-string"
 
-# Authentication (use a long, random, private value)
 JWT_SECRET="replace-with-a-long-random-secret"
 JWT_EXPIRES_IN="1d"
 
-# CORS
 CLIENT_ORIGIN="http://localhost:5173"
+```
 
-If the frontend needs configuration, create client/.env.example as well. Vite only exposes variables prefixed with VITE_, and anything exposed to the browser is public:
+If the frontend needs a configurable API URL, use `client/.env.example`:
 
-env
+```dotenv
 VITE_API_BASE_URL="http://localhost:4000/api"
+```
 
-Make sure .gitignore excludes .env files:
+**Important:** Vite exposes variables prefixed with `VITE_` to client-side code. Never put database credentials, private keys, or other secrets in frontend environment variables.
 
-gitignore
+Ensure `.gitignore` excludes sensitive environment files:
+
+```gitignore
+node_modules/
+dist/
+coverage/
+
 .env
 .env.*
 !.env.example
-Database Setup with Prisma
+```
 
-Important: Prisma commands and configuration can change between versions. The commands below are common examples. Always check that they match your installed Prisma version and your project configuration, and consult the official Prisma documentation if anything differs.
+## Database Setup
 
-Create a PostgreSQL project in Supabase and copy its connection string into DATABASE_URL in server/.env.
-Define your data models in server/prisma/schema.prisma.
-From the server directory, run:
-powershell
+The planned database is PostgreSQL hosted on Supabase, with Prisma used for schema management and database access.
+
+Once Prisma has been configured in the backend:
+
+1. Create a PostgreSQL project in Supabase.
+2. Obtain the appropriate database connection string.
+3. Configure `DATABASE_URL` in `server/.env`.
+4. Define the database models in the Prisma schema.
+5. Generate the Prisma Client and create the initial migration.
+
+Typical development commands are:
+
+```powershell
 cd server
 
-# Generate the Prisma Client
 npx prisma generate
-
-# Create and apply a migration during development
 npx prisma migrate dev --name init
-
-# (Optional) Browse data in Prisma Studio
 npx prisma studio
+```
 
-For deployed environments, migrations are typically applied with npx prisma migrate deploy. Verify this against your Prisma version and hosting setup before use.
+These commands assume a compatible Prisma setup. The exact configuration may differ by Prisma version.
 
-Supabase may offer both pooled and direct connection strings. Which one is appropriate for migrations versus runtime queries depends on your configuration, so check the Supabase and Prisma docs.
+## Planned API Endpoints
 
-API Overview (Planned)
+The following REST API endpoints describe the intended interface. They are **not claimed to be implemented**.
 
-All endpoints below are planned and not yet implemented. Routes, methods, and payloads may change.
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/auth/register` | Register a user |
+| POST | `/api/auth/login` | Authenticate a user |
+| GET | `/api/courts` | List and search courts |
+| GET | `/api/courts/:id` | View court details |
+| GET | `/api/courts/:id/slots?date=YYYY-MM-DD` | Check time-slot availability |
+| POST | `/api/courts` | Create a court |
+| PATCH | `/api/courts/:id` | Update a court |
+| DELETE | `/api/courts/:id` | Delete a court |
+| POST | `/api/bookings` | Create a booking |
+| GET | `/api/bookings/me` | View personal bookings |
+| PATCH | `/api/bookings/:id/cancel` | Cancel an eligible booking |
+| GET | `/api/owner/bookings` | View bookings for owned courts |
 
-Method	Endpoint	Description	Access
-POST	/api/auth/register	Register a new user	Public
-POST	/api/auth/login	Log in and receive a token	Public
-GET	/api/courts	List courts (with search/filter)	Public
-GET	/api/courts/:id	View court details	Public
-GET	/api/courts/:id/slots?date=YYYY-MM-DD	View available time slots for a date	Public
-POST	/api/courts	Create a court	Owner
-PUT	/api/courts/:id	Update a court	Owner (own courts)
-DELETE	/api/courts/:id	Delete a court	Owner (own courts)
-POST	/api/bookings	Book a court time slot	Player
-GET	/api/bookings/me	View personal booking history	Player
-PATCH	/api/bookings/:id/cancel	Cancel an eligible booking	Player (own bookings)
-GET	/api/owner/bookings	View bookings for owned courts	Owner
-Testing
+Access to protected endpoints will depend on authentication, user roles, and resource ownership.
 
-Automated testing is planned using Vitest and Supertest. Tests are not yet implemented, and no test results are claimed.
+## Testing
 
-Once tests exist, the intended workflow is:
+Automated testing is planned using Vitest and Supertest.
 
-powershell
+The intended test coverage includes:
+
+- Authentication and authorization.
+- Court listing and management.
+- Booking creation and cancellation.
+- Invalid requests and error handling.
+- Prevention of duplicate bookings under concurrent requests.
+
+Once the test scripts are configured, run the backend tests with:
+
+```powershell
 cd server
 npm test
+```
 
-Planned test focus areas:
+No test results are claimed until the tests have been implemented and executed.
 
-Authentication and authorization behavior
-Court endpoints
-Booking creation, cancellation rules, and double-booking prevention
+## Security
 
-The test script name is an assumption. Confirm it in server/package.json.
+Security is an important consideration for a booking application. Planned measures include:
 
-Security Considerations
+- Hash passwords using a suitable password-hashing algorithm.
+- Validate incoming requests with Zod.
+- Enforce authentication and role-based authorization on the server.
+- Verify that users can only access or modify resources they are authorized to manage.
+- Keep secrets in environment variables and exclude `.env` files from version control.
+- Enforce booking conflict prevention at the database level and handle concurrent booking attempts safely.
+- Configure CORS to allow trusted origins.
+- Return appropriate error messages without exposing sensitive internal details.
 
-The following are design goals for the project, not claims about the current state of the code:
+These are development goals, not claims that the measures are already implemented.
 
-Password hashing: Passwords should never be stored in plain text. Use a well-established algorithm such as bcrypt or Argon2.
-Authentication: Use signed tokens (e.g., JWT) or secure sessions, with a strong secret and sensible expiry.
-Authorization: Enforce role checks (player vs. court owner) on the server, and verify resource ownership (e.g., owners may only modify their own courts; players may only cancel their own bookings).
-Input validation: Validate and sanitize all incoming request data with Zod before it reaches business logic.
-Environment variables: Keep secrets in .env files that are excluded from version control. Provide only a placeholder .env.example.
-Preventing duplicate bookings: Enforce uniqueness at the database level (e.g., a unique constraint or an exclusion approach on court and time slot) and handle conflicts safely in a transaction, so concurrent requests cannot book the same slot.
-Other practices to consider: CORS restricted to known origins, rate limiting on auth routes, and avoiding leaking sensitive details in error messages.
-Roadmap
- Phase 1: Setup
- Initialize client and server projects with TypeScript
- Configure Prisma and connect to Supabase PostgreSQL
- Set up linting and basic project scripts
- Phase 2: Authentication
- User registration and login
- Role-based access (player / owner)
- Phase 3: Courts
- Court listing, details, search, and filters
- Owner court management
- Phase 4: Booking
- Available time slots by date
- Create, view, and cancel bookings
- Double-booking prevention
- Phase 5: Quality
- Tests for key endpoints and booking logic
- Phase 6: Deployment
- Deploy frontend (Vercel)
- Choose a host and deploy the backend
- Future ideas: payments, reviews, notifications, owner analytics
-Contributing
+## Roadmap
 
-Courtly is a personal learning project, but feedback and suggestions are welcome.
+- [ ] **Phase 1:** Initialize the frontend and backend projects.
+- [ ] **Phase 2:** Configure PostgreSQL, Prisma, and database models.
+- [ ] **Phase 3:** Implement registration, login, and authorization.
+- [ ] **Phase 4:** Build court listing, search, and management.
+- [ ] **Phase 5:** Implement booking, cancellation, and conflict prevention.
+- [ ] **Phase 6:** Build the frontend and integrate the API.
+- [ ] **Phase 7:** Add automated tests and improve error handling.
+- [ ] **Phase 8:** Deploy the application and document the completed system.
 
-Open an issue to report a bug, suggest an improvement, or ask a question.
-If you’d like to contribute code, please open an issue first to discuss your idea.
-Fork the repository, create a feature branch (git checkout -b feature/your-feature), and open a pull request with a clear description.
-Keep changes small and focused, and avoid committing secrets or .env files.
+Future improvements may include online payments, court reviews, notifications, and owner analytics.
 
-Response times may vary, as this is a side project.
+## Contributing
 
-License
+Courtly is a personal learning project, and suggestions are welcome.
 
-No license has been selected yet. Until a license is added, all rights are reserved by the author by default. If you wish to use or build on this code, please contact the author.
+For proposed improvements:
 
-Author
+1. Open an issue describing the change or problem.
+2. Create a feature branch.
+3. Make focused changes and test them.
+4. Submit a pull request with a clear description.
 
-GitHub: makeit-master <!-- https://github.com/makeit-master -->
+Please avoid committing secrets, generated dependencies, or unrelated changes.
+
+## License
+
+No license has been selected yet. Until a license is added, the project should be treated as all rights reserved by its author.
+
+## Author
+
+**GitHub:** [@makeit-master](https://github.com/makeit-master)
